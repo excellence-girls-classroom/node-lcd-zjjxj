@@ -1,0 +1,11 @@
+  function toStringArray(inputs) {
+
+    //var src = inputs.toString();
+	inputs += '';
+    var stringArray =inputs.split("");
+
+    return stringArray;
+
+}
+exports.toStringArray=toStringArray;
+
