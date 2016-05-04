@@ -1,37 +1,45 @@
-var useGridNum=require('./useGridNum');
-var useGrid=require('./useGrid');
-var gridNum=useGridNum.theGridNum();
-var grid=useGrid.theGrid();
-var array=require('../main/array');
-var string=require('../main/string');
+var useGrid = require('./useGrid');
+var allLcds = useGrid.theGrid();
+var numArray = require('../main/numArray');
+var lcdArray = require('../main/lcdArray');
+var printString = require('../main/printString');
 
-     
-describe('unit testing', function() {
-   var grid,gridNum;
-   beforeEach(function(){
-	grid=useGrid.theGrid();
-	gridNum=useGridNum.theGridNum();
-	})
-    
-    	describe('Text stringarray',function () {
-	       inputs=910;
-            it('return right stringarray',function () {
-                var stringarray= array.toStringArray(inputs);
-                expect(stringarray).toEqual(["9","1","0"]);
+describe('unit testing', function () {
+    var allLcds;
 
-            });
-	 });
-  
-        describe('Text allStr',function () {
-		inputs=910;
-            it('return right allStr',function () {
-                 var stringarray= array.toStringArray(inputs);
-                var allStr= string.numberString(stringarray,grid,gridNum) ;
-                expect(allStr).toEqual(
-                    "\n"+"._."+" "+"..."+" "+"._."+" "+"\n" +"|_|"+" "+"..|"+" "+"|.|"+" "+"\n" +"..|"+" "+"..|"+" "+"|_|"+" "+"\n"
+    beforeEach(function () {
+        allLcds = useGrid.theGrid();
+    })
 
-                );
+    describe('Text numberarray', function () {
+        inputs = 910;
+        it('return right numberarray', function () {
+            var numberArray = numArray.buildNumberArray(inputs);
 
-            });
-	 });
+            expect(numberArray).toEqual([9, 1, 0]);
+        });
+    });
+
+    describe('Text lcdarray', function () {
+        inputs = 910;
+        it('return right lcdarray', function () {
+            var numberArray = numArray.buildNumberArray(inputs);
+            var lcdArrays = lcdArray.buildLcdString(allLcds, numberArray);
+
+            expect(lcdArrays).toEqual(
+                [['._.', '|_|', '..|'], ['...', '..|', '..|'], ['._.', '|.|', '|_|']]
+            );
+        });
+    });
+
+    describe('Text printlcd', function () {
+        inputs = 910;
+        it('return right lcd', function () {
+            var numberArray = numArray.buildNumberArray(inputs);
+            var lcdArrays = lcdArray.buildLcdString(allLcds, numberArray);
+            var lcd = printString.printString(lcdArrays);
+
+            expect(lcd).toEqual('._. ... ._.\n' + '|_| ..| |.|\n' + '..| ..| |_|');
+        });
+    });
 });
