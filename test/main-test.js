@@ -3,9 +3,11 @@ var main = require('../main/main');
 
 describe('Integration Testing', function () {
     var inputs;
+
     beforeEach(function () {
         inputs = 910;
     })
+
     it('should print correct text', function () {
         spyOn(console, 'log');
         main.finalString(inputs);
@@ -20,10 +22,10 @@ describe('Integration Testing', function () {
 describe('unit testing', function () {
     var allLcds;
     var inputs;
+
     beforeEach(function () {
         allLcds = useGrid.theGrid();
         inputs = 910;
-
     })
 
     describe('Text numberarray', function () {
